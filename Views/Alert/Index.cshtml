@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<br /><br />
+<button class="btn btn-primary" id="btn1">Helloo</button>
+<button class="btn btn-secondary" id="btn2">Helloo</button>
+<button class="btn btn-danger" id="btn3">Helloo</button>
+<button class="btn btn-success" id="btn4">Helloo</button>
+<button class="btn btn-success" id="btn5">Helloo</button>
+<script>
+    $('#btn1').click(function () {
+        swal("Hello world!");
+    });
+</script>
+<script>
+    $('#btn2').click(function () {
+        swal("Good job!", "You clicked the button!", "success");
+    });
+</script>
+<script>
+    $('#btn3').click(function () {
+        swal("Error!", "You are stupid!", "error");
+    });
+</script>
+<script>
+    $('#btn4').click(function () {
+        swal("Are you sure you want to do this?", {
+            buttons: ["Oh noez!", "Aww yiss!"],
+        });
+    });
+</script>
+<script>
+    $('#btn5').click(function () {
+        swal("A wild Pikachu appeared! What do you want to do?", {
+            buttons: {
+                cancel: "Run away!",
+                catch: {
+                    text: "Throw Pokéball!",
+                    value: "catch",
+                },
+                defeat: true,
+            },
+        })
+            .then((value) => {
+                switch (value) {
+
+                    case "defeat":
+                        swal("Pikachu fainted! You gained 500 XP!");
+                        break;
+
+                    case "catch":
+                        swal("Gotcha!", "Pikachu was caught!", "success");
+                        break;
+
+                    default:
+                        swal("Got away safely!");
+                }
+            });
+    });
+</script>
+

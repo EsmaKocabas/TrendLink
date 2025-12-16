@@ -1,0 +1,69 @@
+﻿@using MVCOnlineTicariOtomasyon.Models.Siniflar
+@model List<Faturalar>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<table class="table table-bordered" style="margin-top:20px;">
+    <tr>
+        <th>Seri No</th>
+        <th>Sıra No</th>
+        <th>Tarih</th>
+        <th>Saat</th>
+        <th>Toplam</th>
+        <th>Güncelle</th>
+        <th>Teslim Detaylar</th>
+        <th>Yeni Kalem</th>
+    </tr>
+    @foreach (var f in Model)
+    {
+        <tr>
+            
+            <td>
+                @f.FaturaSeriNo
+            </td>
+            <td>@f.FaturaSıraNo</td>
+            <td>@f.Tarih</td>
+            <td>@f.Saat</td>
+            <td>@f.Toplam</td>
+            <td><a href="/Fatura/FaturaGetir/@f.FaturaID" class="btn btn-warning">Güncelle</a></td>
+            <td><a href="/Fatura/FaturaDetay/@f.FaturaID" class="btn btn-success">Detay</a></td>
+            <td><a href="/Fatura/FaturaDetay/@f.FaturaID" class="btn btn-info">Kalem</a></td>
+        </tr>
+    }
+</table>
+<a href="/Fatura/FaturaEkle" class="btn btn-primary">Yeni Fatura</a>
+<br/>
+<br/>
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Modal1">Popup Penceresi</button>
+
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Popup Diyalog Ekranı</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Seri No</th>
+                        <th>Sıra No</th>
+                        <th>Tutar</th>
+                    </tr>
+                    @foreach(var x in Model)
+            {
+                <tr>
+                    <td>@x.FaturaSeriNo</td>
+                    <td>@x.FaturaSıraNo</td>
+                    <td>@x.Toplam</td>
+                </tr>
+            }
+                </table>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Vazgeç</button>
+            </div>
+        </div>
+    </div>
+</div>
+

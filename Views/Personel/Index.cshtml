@@ -1,0 +1,56 @@
+@using MVCOnlineTicariOtomasyon.Models.Siniflar
+@model List<Personel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+<h2>Personel Sayfası</h2>
+<br />
+<table id="tblPersonel" class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Görsel</th>
+            <th>Departman</th>
+            <th>Güncelle</th>
+            <th>Satışlar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.PersonelID</td>
+                <td>@p.PersonelAd</td>
+                <td>@p.PersonelSoyad</td>
+                <td>
+                    <img src="@p.PersonelGorsel" style="width:100px; height:100px;"/>
+                </td>
+                <td>@p.Departman.DepartmanAd</td>
+                <td><a href="/Personel/PersonelGetir/@p.PersonelID" class="btn btn-warning">Güncelle</a></td>
+                <td><a href="/Departman/DepartmanPersonelSatis/@p.PersonelID" class="btn btn-success">Satışlar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Personel/PersonelEkle/" class="btn btn-primary">Yeni Personel</a>
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tblPersonel').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Turkish.json"
+            }
+        });
+    });
+</script>
+

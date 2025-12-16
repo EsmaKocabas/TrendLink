@@ -1,0 +1,44 @@
+﻿@model MVCOnlineTicariOtomasyon.Models.Siniflar.Kategori
+
+@{
+    ViewBag.Title = "KategoriEkle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+<h2>Yeni Kategori Sayfası</h2>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<br />
+<div class="form-group">
+    @Html.LabelFor(x => x.KategoriAd)
+    @Html.TextBoxFor(x => x.KategoriAd, new { @class = "form-control", id = "KategoriAd" })
+    <br />
+    <button type="button" class="btn btn-info" id="Btn1">Kaydet</button>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#Btn1').click(function (e) {
+            e.preventDefault();
+
+            var kategoriAd = $('#KategoriAd').val();
+            if (!kategoriAd.trim()) {
+                alert("Kategori adı boş bırakılamaz!");
+                return;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/Kategori/KategoriEkle',
+                data: JSON.stringify({ KategoriAd: kategoriAd }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    alert('Kategori Eklendi');
+                    $('#KategoriAd').val('');
+                },
+                error: function (xhr, status, error) {
+                    alert('Bir hata oluştu: ' + error);
+                }
+            });
+        });
+    });
+</script>
